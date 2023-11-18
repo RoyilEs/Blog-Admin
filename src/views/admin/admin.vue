@@ -15,8 +15,8 @@
             <div class="right">
                 <div class="icon_actions">
                   <i class="fa fa-home"></i>
-                  <i class="fa fa-moon-o"></i>
-                  <i class="fa fa-sun-o"></i>
+                  <i v-if="theme" class="fa fa-sun-o" @click="setTheme"></i>
+                  <i v-else class="fa fa-moon-o" @click="setTheme"></i>
                   <i class="fa fa-arrows-alt"></i>
                 </div>
                 <div class="avatar">
@@ -56,6 +56,7 @@
 <script setup>
 
 import {useRouter} from "vue-router";
+import {ref} from "vue";
 
 const router = useRouter();
 
@@ -69,6 +70,21 @@ function menuClick({key}) {
       name: key
     })
   }
+
+  const theme = ref(true)
+
+function setTheme() {
+  theme.value = !theme.value
+  if (theme.value) {
+    //sun
+    document.documentElement.classList.remove("dark")
+  } else {
+    //moon
+    document.documentElement.classList.add("dark")
+  }
+
+}
+
 </script>
 
 <style lang="scss">
