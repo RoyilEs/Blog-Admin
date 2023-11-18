@@ -11,4 +11,9 @@
     margin: 0;
     box-sizing: border-box;
   }
+
+  :root {
+    --active: cadetblue;
+    --text: #555;
+  }
 </style>
