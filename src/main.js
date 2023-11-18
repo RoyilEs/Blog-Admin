@@ -8,6 +8,7 @@ import router from './router'
 import Antd from 'ant-design-vue'
 import "@/assets/css/iconfont.css";
 import "font-awesome/css/font-awesome.min.css"
+import "./assets/css/theme.css"
 
 const app = createApp(App)
 
