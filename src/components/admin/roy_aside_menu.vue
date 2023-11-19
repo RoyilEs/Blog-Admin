@@ -3,20 +3,21 @@
       v-model:selectedKeys="selectedKeys"
       mode="inline"
       :inline-collapsed="false"
+      @click="goto"
   >
-    <template v-for="menu in data.menuList" :key="menu.id">
-      <a-menu-item :key="menu.id" v-if="menu.children.length === 0">
+    <template v-for="menu in data.menuList" :key="menu.name">
+      <a-menu-item :key="menu.name" v-if="menu.children.length === 0">
         <template #icon>
           <i :class="menu.icon"></i>
         </template>
         <span>{{ menu.title }}</span>
       </a-menu-item>
-      <a-sub-menu :key="menu.id" v-else>
+      <a-sub-menu :key="menu.name" v-else>
         <template #icon>
           <i :class="menu.icon"></i>
         </template>
         <template #title>{{ menu.title }}</template>
-        <a-menu-item v-for="sub_menu in menu.children" :key="sub_menu.id">
+        <a-menu-item v-for="sub_menu in menu.children" :key="sub_menu.name">
           <template #icon>
             <i :class="sub_menu.icon"></i></template>
           <span>{{ sub_menu.title }}</span>
@@ -29,6 +30,9 @@
 
 <script setup>
 import {reactive, ref} from "vue";
+import {useRouter} from "vue-router";
+//实例化
+const router = useRouter();
 
   const data = reactive({
     menuList: [
@@ -50,12 +54,6 @@ import {reactive, ref} from "vue";
             icon: "fa fa-user", //icon图标 统一用 fa
             title: "用户列表", // 菜单名称 二级路由
             name: "user_list", // 路由名称
-          },
-          {
-            id : 4,
-            icon: "fa fa-user-plus", //icon图标 统一用 fa
-            title: "添加用户", // 菜单名称 二级路由
-            name: "user_create", // 路由名称
           }
         ]
       },
@@ -91,6 +89,12 @@ import {reactive, ref} from "vue";
   })
 
   const selectedKeys = ref(['1'])
+
+  function goto(event) {
+    router.push({
+      name: event.key
+    })
+  }
 </script>
 
 <style>

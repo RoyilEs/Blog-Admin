@@ -19,7 +19,7 @@
 
 <style scoped lang="scss">
   .roy_aside {
-    width: 240px;
+    width: 190px;
     height: 100vh;
     background-color: cadetblue;
 
@@ -35,7 +35,7 @@
       padding: 10px;
       img {
         width: 100%;
-        height: 110px;
+        height: 90px;
       }
 
       //&::after {
