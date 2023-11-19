@@ -18,7 +18,7 @@
                   <i v-else class="fa fa-moon-o" @click="setTheme"></i>
                   <i class="fa fa-arrows-alt"></i>
                 </div>
-                  <RoyUserInfo></RoyUserInfo>
+                  <RoyUserInfo :is-avatar="true"></RoyUserInfo>
               </div>
         </header>
         <div class="tabs"></div>

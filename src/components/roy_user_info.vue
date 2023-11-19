@@ -1,6 +1,6 @@
 <template>
   <div class="roy_user_info">
-    <div class="avatar">
+    <div class="avatar" v-if="props.isAvatar">
       <img src="/src/assets/img/头像.jpg" alt="头像">
     </div>
 
@@ -33,6 +33,14 @@ import {useRouter} from "vue-router";
 
 const router = useRouter();
 
+const props = defineProps({
+  //是否显示头像部分
+  isAvatar : {
+    type : Boolean,
+    default : false
+  }
+})
+
 function menuClick({key}) {
   //退出操作 其他跳转路由
   if (key === "logout") {
@@ -43,6 +51,9 @@ function menuClick({key}) {
     name: key
   })
 }
+
+
+
 </script>
 
 <style>
