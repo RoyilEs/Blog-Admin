@@ -7,14 +7,14 @@
     <div class="roy_aside_title">Roy后台系统</div>
   </div>
     <div class="roy_aside_body flex">
-
+      <RoyAsideMenu></RoyAsideMenu>
     </div>
   </aside>
 
 </template>
 
 <script setup>
-
+  import RoyAsideMenu from "./roy_aside_menu.vue"
 </script>
 
 <style scoped lang="scss">
@@ -25,7 +25,7 @@
 
     .roy_aside_header {
       width: 100%;
-      height: 180px;
+      height: 150px;
       flex-direction: column;
     }
 
