@@ -1,8 +1,7 @@
 <template>
     <div class="roy_admin">
-        <aside>
+        <RoyAside></RoyAside>
 
-        </aside>
         <div class="main">
         <header>
             <div class="left">
@@ -20,7 +19,7 @@
                   <i class="fa fa-arrows-alt"></i>
                 </div>
                 <div class="avatar">
-                  <img src="./blog_admin/src/assets/头像.jpg" alt="头像">
+                  <img src="/src/assets/img/头像.jpg" alt="头像">
                 </div>
 
                 <div class="drop_menu">
@@ -54,6 +53,7 @@
 </template>
 
 <script setup>
+import RoyAside from "@/components/admin/admin_aside.vue";
 
 import {useRouter} from "vue-router";
 import {ref} from "vue";
@@ -91,11 +91,6 @@ function setTheme() {
   .roy_admin {
     width: 100%;
     display: flex;
-    aside {
-        width: 240px;
-        height: 100vh;
-        background-color: cadetblue;
-    }
     .main {
         width: calc(100% - 240px);
 
