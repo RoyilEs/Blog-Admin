@@ -23,7 +23,10 @@
         </header>
         <div class="tabs"></div>
         <main>
-          <router-view></router-view>
+          <div class="roy_view">
+            <router-view></router-view>
+          </div>
+
         </main>
     </div>
     </div>
@@ -104,6 +107,10 @@ function setTheme() {
         main {
            background-color: #f0eeee; 
            height: calc(100vh - 90px);
+           padding: 20px;
+          .roy_view {
+            background-color: #fff;
+          }
         }
     }
   }
