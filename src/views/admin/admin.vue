@@ -102,7 +102,9 @@ function setTheme() {
         }
         .tabs {
             height: 30px;
-            border: 1px solid #f0eeee;
+            border-color: #f0eeee;
+            border: solid;
+            border-width: 0.5px 0 0.5px 0;
         }
         main {
            background-color: #f0eeee; 
