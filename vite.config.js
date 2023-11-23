@@ -11,6 +11,14 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    },
+  },
+  server: {
+    //代理
+    proxy: {
+      '/uploads': {
+        target: 'http://127.0.0.1:8080',
+      }
     }
   }
 })

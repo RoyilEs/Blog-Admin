@@ -22,7 +22,15 @@
                  selectedRowKeys: data.selectedRowKeys, onChange: onSelectChange }"
               :row-key="'ID'"
       >
-
+        <template #bodyCell="{ column, record }">
+          <template v-if="column.key === 'avatar'">
+            <img class="table_avatar" :src="record.avatar" alt="头像地址">
+          </template>
+          <!-- 时间渲染-->
+          <template v-if="column.key === 'CreatedAt'">
+            <span>{{ getFormatDate(record.CreatedAt) }}</span>
+          </template>
+        </template>
       </a-table>
     </div>
     <div class="pages">
@@ -40,6 +48,7 @@
 
 <script setup>
   import {reactive} from "vue";
+  import {getFormatDate} from "@/utils/date";
 
   //分页数据
   const page = reactive({
@@ -123,6 +132,11 @@
       display: flex;
       justify-content: center;
       padding: 10px;
+    }
+    .table_avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 40%;
     }
   }
 </style>
