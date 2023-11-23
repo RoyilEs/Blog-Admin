@@ -3,7 +3,7 @@
     <div class="search">
       <a-space direction="vertical">
         <a-input-search
-            placeholder="input search text"
+            placeholder="搜索用户昵称"
             style="width: 200px"
         />
       </a-space>
@@ -29,6 +29,10 @@
           <!-- 时间渲染-->
           <template v-if="column.key === 'CreatedAt'">
             <span>{{ getFormatDate(record.CreatedAt) }}</span>
+          </template>
+          <template v-if="column.key === 'action'">
+            <a-button type="primary">编辑</a-button>
+            <a-button type="primary" danger>删除</a-button>
           </template>
         </template>
       </a-table>
@@ -81,6 +85,9 @@
       },
       {
         title: '注册时间', dataIndex: 'CreatedAt', key: 'CreatedAt',
+      },
+      {
+        title: '操作', dataIndex: 'action', key: 'action',
       }
     ],
     list: [
