@@ -6,7 +6,7 @@
         <div class="login_form">
 
           <div class="login_form_item">
-            <a-input  placeholder="User">
+            <a-input  placeholder="User" v-model:value="data.username">
               <template #prefix>
                 <i class="fa fa-user-o"></i>
               </template>
@@ -14,7 +14,7 @@
           </div>
 
           <div class="login_form_item">
-            <a-input type="password"  placeholder="Password">
+            <a-input type="password"  placeholder="Password"  v-model:value="data.password">
               <template #prefix>
                 <i class="fa fa-key"></i>
               </template>
@@ -22,7 +22,7 @@
           </div>
 
           <div class="login_form_item">
-            <a-button type="primary">登录</a-button>
+            <a-button type="primary" @click="emailLogin">登录</a-button>
           </div>
 
         </div>
@@ -32,7 +32,31 @@
 </template>
 
 <script setup>
+  import {reactive} from "vue";
+  import { message } from 'ant-design-vue';
+  import { emailLoginApi } from "@/api/user_api";
 
+
+  const data = reactive({
+    username: "",
+    password: "",
+  })
+
+  async function emailLogin() {
+    if (data.username.trim() === "") {
+      message.error("请输入用户名")
+    }
+    if (data.password.trim() === "") {
+      message.error("请输入密码")
+    }
+
+    let res = await emailLoginApi(data)
+    if (res.code) {
+      message.error(res.msg)
+      return
+    }
+    message.success(res.msg)
+  }
 </script>
 
 <style lang="scss">

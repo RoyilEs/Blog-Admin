@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "ant-design-vue": "^4.0.7",
+    "axios": "^1.6.2",
     "font-awesome": "^4.7.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.4",

@@ -24,6 +24,10 @@ export default ({mode}) => {
          proxy: {
            '/uploads': {
              target: VITE_API,
+           },
+             //通过代理直接跳过跨域请求
+           '/api': {
+               target: VITE_API,
            }
          }
        }
