@@ -50,6 +50,8 @@
   import {reactive} from "vue";
   import {getFormatDate} from "@/utils/date";
 
+  console.log(import.meta.env)
+
   //分页数据
   const page = reactive({
     page: 1,
