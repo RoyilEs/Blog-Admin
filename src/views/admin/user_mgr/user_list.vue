@@ -9,11 +9,19 @@
       </a-space>
     </div>
     <div class="actions">
-      <a-button type="primary">Primary Button</a-button>
-      <a-button>Default Button</a-button>
+      <a-button type="primary">New User</a-button>
+      <a-button type="primary"
+                @click="removeBatch"
+                danger v-if="data.selectedRowKeys.length">Remove User</a-button>
     </div>
     <div class="tables">
-      <a-table :columns="data.columns" :data-source="data.list" :pagination="false">
+      <a-table :columns="data.columns"
+               :data-source="data.list"
+               :pagination="false"
+               :row-selection="{
+                 selectedRowKeys: data.selectedRowKeys, onChange: onSelectChange }"
+              :row-key="'ID'"
+      >
 
       </a-table>
     </div>
@@ -42,30 +50,56 @@
   const data = reactive({
     columns: [
       {
-        title: 'name',
-        dataIndex: 'name',
-        key: 'name',
+        title: 'ID',dataIndex: 'ID', key: 'ID',
       },
       {
-        title: 'age',
-        dataIndex: 'age',
-        key: 'age',
+        title: '昵称', dataIndex: 'nickname', key: 'nickname',
       },
       {
-        title: 'date',
-        dataIndex: 'date',
-        key: 'date',
+        title: '头像', dataIndex: 'avatar', key: 'avatar',
+      },
+      {
+        title: '用户名', dataIndex: 'username', key: 'username',
+      },
+
+      {
+        title: '邮箱', dataIndex: 'email', key: 'email',
+      },
+      {
+        title: '电话', dataIndex: 'phone', key: 'phone',
+      },
+      {
+        title: '注册时间', dataIndex: 'CreatedAt', key: 'CreatedAt',
       }
     ],
     list: [
       {
-        name: "Roy",
-        age: 19,
-        date: "2004-01-01 12:12:12"
-      }
-    ]
+        "ID": 2,
+        "CreatedAt": "2023-11-12T13:19:52.236Z",
+        "UpdatedAt": "2023-11-13T12:23:28.262Z",
+        "DeletedAt": null,
+        "nickname": "Rooyill",
+        "username": "Roy",
+        "email": "qq******163.com",
+        "phone": "173****8918",
+        "password": "$2a$04$yLJWgbCk8MSRE7kRx0ePYOzGuENtyKaODrTCKU7IGu2c4KTQ9ncJm",
+        "permission": "管理员",
+        "avatar": "/uploads/avatar/头像.png",
+        "token": ""
+      },
+    ],
+    selectedRowKeys: []
 
   })
+
+  function onSelectChange(selectedKeys) {
+    data.selectedRowKeys = selectedKeys
+
+  }
+
+  function removeBatch() {
+    console.log(data.selectedRowKeys)
+  }
 </script>
 
 <style lang="scss">
