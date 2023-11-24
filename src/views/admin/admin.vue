@@ -62,6 +62,8 @@ function setTheme() {
     display: flex;
     .main {
         width: calc(100% - 240px);
+        height: 100vh;
+        overflow-y: auto;
 
         header {
             height: 60px;
@@ -107,8 +109,7 @@ function setTheme() {
             border-width: 0.5px 0 0.5px 0;
         }
         main {
-           background-color: #f0eeee; 
-           height: calc(100vh - 90px);
+           background-color: #f0eeee;
            padding: 20px;
           .roy_view {
             background-color: #fff;

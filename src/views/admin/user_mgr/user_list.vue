@@ -125,7 +125,7 @@ import {message} from "ant-design-vue";
   //分页数据
   const page = reactive({
     page: 1,
-    limit: 10
+    limit: 5
   })
   const formRef = ref(null)
   //权限的数据
@@ -227,7 +227,7 @@ import {message} from "ant-design-vue";
   //获取用户信息
   async function getData() {
     //请求出的数据是 userList
-    let res = await userListApi({})
+    let res = await userListApi(page)
     data.list = res.data.list
     data.count = res.data.count
   }
