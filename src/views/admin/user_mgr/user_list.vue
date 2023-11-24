@@ -43,7 +43,7 @@
           :show-size-changer="false"
           v-model:current="page.page"
           v-model:page-size="page.limit"
-          :total="85"
+          :total="data.count"
           :show-total="total => `Total ${total} items`"
       />
     </div>
@@ -51,8 +51,9 @@
 </template>
 
 <script setup>
-  import {reactive} from "vue";
-  import {getFormatDate} from "@/utils/date";
+  import { reactive } from "vue";
+  import { getFormatDate } from "@/utils/date";
+  import { userListApi } from "@/api/user_api";
 
   console.log(import.meta.env)
 
@@ -106,7 +107,8 @@
         "token": ""
       },
     ],
-    selectedRowKeys: []
+    selectedRowKeys: [],
+    count: 0,
 
   })
 
@@ -118,6 +120,15 @@
   function removeBatch() {
     console.log(data.selectedRowKeys)
   }
+
+  //获取用户信息
+  async function getData() {
+    //请求出的数据是 userList
+    let res = await userListApi({})
+    data.list = res.data.list
+    data.count = res.data.count
+  }
+  getData()
 </script>
 
 <style lang="scss">

@@ -55,7 +55,7 @@
     if (data.password.trim() === "") {
       message.error("请输入密码")
     }
-
+    //返回信息为 原始jwt token 未解析
     let res = await emailLoginApi(data)
     if (res.code) {
       message.error(res.msg)
@@ -64,6 +64,8 @@
     //res.data就是 jwt的token 需要解码
     message.success(res.msg)
     let userInfo = parseToken(res.data)
+    //存储用户token
+    userInfo.token = res.data
     store.setUserInfo(userInfo)
 
     const redirect_url = route.query.redirect_url

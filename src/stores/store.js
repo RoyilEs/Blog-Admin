@@ -9,6 +9,7 @@ export const useStore = defineStore('roy',  {
    return {
      theme: true,
        userInfo: {
+            token: "",
             username: '',
             nickname: '',
             role: 0,
@@ -61,10 +62,10 @@ export const useStore = defineStore('roy',  {
           let userInfo = JSON.parse(info)
 
           // 判断时间是否失效
-          let exp = userInfo.exp * 1000  //获取exp
+          let exp = userInfo.exp //获取exp
           let newTime = new Date().getTime() //获取当前时间
 
-          if ((exp - newTime) < 0) {
+          if (( (exp * 1000)  - newTime) < 0) {
               //过期
               message.warn("登录信息已过期")
               return
