@@ -35,7 +35,10 @@
   import {reactive} from "vue";
   import { message } from 'ant-design-vue';
   import { emailLoginApi } from "@/api/user_api";
+  import { parseToken } from "@/utils/jwt";
+  import { useStore } from "@/stores/store";
 
+  const store = useStore()
 
   const data = reactive({
     username: "",
@@ -55,7 +58,12 @@
       message.error(res.msg)
       return
     }
+    //res.data就是 jwt的token 需要解码
     message.success(res.msg)
+    let userInfo = parseToken(res.data)
+    store.setUserInfo(userInfo)
+
+    // console.log(store.userInfo)
   }
 </script>
 

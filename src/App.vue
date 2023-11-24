@@ -1,9 +1,16 @@
-<script setup>
-</script>
 
 <template>
   <RouterView/>
 </template>
+
+<script setup>
+  import { useStore } from "@/stores/store";
+
+  const store = useStore()
+
+  store.loadUserInfo()
+
+</script>
 
 <style lang="scss">
   * {
