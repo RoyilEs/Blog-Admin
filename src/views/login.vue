@@ -37,8 +37,11 @@
   import { emailLoginApi } from "@/api/user_api";
   import { parseToken } from "@/utils/jwt";
   import { useStore } from "@/stores/store";
+  import { useRoute, useRouter } from "vue-router";
 
   const store = useStore()
+  const router = useRouter()
+  const route = useRoute()
 
   const data = reactive({
     username: "",
@@ -63,7 +66,22 @@
     let userInfo = parseToken(res.data)
     store.setUserInfo(userInfo)
 
-    // console.log(store.userInfo)
+    const redirect_url = route.query.redirect_url
+    //登录成功只会进行跳转
+    if (redirect_url === undefined) {
+      //跳转到首页
+      setTimeout(() => {
+        router.push({name: "home"})
+      }, 1000)
+      return
+    }
+
+    //携带源路径登录成功会进行跳转
+    setTimeout(() => {
+      router.push({path: redirect_url})
+    }, 1000)
+
+
   }
 </script>
 
