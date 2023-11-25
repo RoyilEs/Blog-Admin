@@ -162,13 +162,15 @@ import { getFormatDate } from "@/utils/date";
 import {userListApi, userCreateApi, userRemoveApi, userUpdateNicknameApi} from "@/api/user_api";
 import {message} from "ant-design-vue";
 
+  console.log(import.meta.env)
+
   //分页数据
   const page = reactive({
     page: 1,
     limit: 5
   })
   const formRef = ref(null)
-  //权限的数据 映射
+  //权限的数据
   const permissionOptions = [
     {
       value: 1,
@@ -261,16 +263,15 @@ import {message} from "ant-design-vue";
     "user_id": 0
   })
 
-  // 添加用户form的展开
-  function addModal() {
+function addModal() {
   data.modelVisible = true
 }
-  //选择复选框
+
   function onSelectChange(selectedKeys) {
     data.selectedRowKeys = selectedKeys
 
   }
-  //批量删除
+
   async function removeBatch() {
     let res = await userRemoveApi(data.selectedRowKeys)
     if (res.code) {
@@ -288,7 +289,7 @@ import {message} from "ant-design-vue";
     data.list = res.data.list
     data.count = res.data.count
   }
-  //添加用户
+
   async function handleOk() {
     //捕获错误
     try {
@@ -309,36 +310,38 @@ import {message} from "ant-design-vue";
     }
   }
   //分页
-  function pageChange(page, limit) {
+ function pageChange(page, limit) {
     getData()
  }
- //用户单独删除
-  async function userRemove(user_id) {
-      let res = await userRemoveApi([user_id])
-      if (res.code) {
-        message.error(res.msg)
-        return
-      }
-      message.success(res.msg)
-      getData()
- }
- //编辑修改 赋值
-  function updateModal(record) {
-      data.modelUpdateVisible = true
-      formUpdateState.user_id = record.ID
-      formUpdateState.nickname = record.nickname
-      formUpdateState.permission = record.permission
-  }
-  //编辑修改 事件
-  async function update() {
-    data.modelUpdateVisible = false
-    let res = await userUpdateNicknameApi(formUpdateState)
+
+ async function userRemove(user_id) {
+    let res = await userRemoveApi([user_id])
     if (res.code) {
       message.error(res.msg)
       return
     }
     message.success(res.msg)
     getData()
+ }
+
+ //编辑修改 赋值
+function updateModal(record) {
+    data.modelUpdateVisible = true
+    formUpdateState.user_id = record.ID
+    formUpdateState.nickname = record.nickname
+    formUpdateState.permission = record.permission
+}
+
+//编辑修改 事件
+async function update() {
+  data.modelUpdateVisible = false
+  let res = await userUpdateNicknameApi(formUpdateState)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  getData()
 }
 
   //释放数据
