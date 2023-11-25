@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <a-modal v-model:visible="data.modelVisible" title="添加用户" @ok="handleOk">
+    <a-modal v-model:visible="data.modelVisible" title="新增用户" @ok="handleOk">
       <a-form
           :model="formState"
           name="basic"
@@ -64,6 +64,40 @@
       </a-form>
     </a-modal>
 
+    <a-modal v-model:visible="data.modelUpdateVisible" title="编辑用户" @ok="update">
+      <a-form
+          :model="formUpdateState"
+          name="basic"
+          ref="formRef"
+          :label-col="{ span: 8 }"
+          :wrapper-col="{ span: 16 }"
+          autocomplete="off"
+      >
+
+        <a-form-item
+            label="Nickname"
+            name="nickname" has-feedback
+            :rules="[{ required: true, message: 'Please input your nickname!', trigger: 'blur' }]"
+        >
+          <a-input v-model:value="formUpdateState.nickname" placeholder="nickname"/>
+        </a-form-item>
+
+        <a-form-item
+            label="Permission"
+            name="permission" has-feedback
+            :rules="[{ required: true, message: 'Please select your permission!', trigger: 'blur'}]"
+        >
+          <a-select
+              v-model:value="formUpdateState.permission"
+              :size="size"
+              style="width: 200px"
+              :options="permissionOptions"
+              placeholder="Please select your permission"
+          ></a-select>
+        </a-form-item>
+      </a-form>
+    </a-modal>
+
     <div class="search">
       <a-space direction="vertical">
         <a-input-search
@@ -73,7 +107,7 @@
       </a-space>
     </div>
     <div class="actions">
-      <a-button type="primary" @click="data.modelVisible = true">New User</a-button>
+      <a-button type="primary" @click="addModal">New User</a-button>
       <a-button type="primary"
                 @click="removeBatch"
                 danger v-if="data.selectedRowKeys.length">Remove User</a-button>
@@ -95,8 +129,15 @@
             <span>{{ getFormatDate(record.CreatedAt) }}</span>
           </template>
           <template v-if="column.key === 'action'">
-            <a-button type="primary">编辑</a-button>
-            <a-button type="primary" danger>删除</a-button>
+            <a-button type="primary" @click="updateModal(record)">编辑</a-button>
+            <a-popconfirm
+                title="Are you sure delete this task?"
+                ok-text="Yes"
+                cancel-text="No"
+                @confirm="userRemove(record.ID)"
+            >
+              <a-button type="primary" danger>删除</a-button>
+            </a-popconfirm>
           </template>
         </template>
       </a-table>
@@ -107,6 +148,7 @@
           :show-size-changer="false"
           v-model:current="page.page"
           v-model:page-size="page.limit"
+          @change="pageChange"
           :total="data.count"
           :show-total="total => `Total ${total} items`"
       />
@@ -116,8 +158,8 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-  import { getFormatDate } from "@/utils/date";
-  import { userListApi, userCreateApi } from "@/api/user_api";
+import { getFormatDate } from "@/utils/date";
+import {userListApi, userCreateApi, userRemoveApi, userUpdateNicknameApi} from "@/api/user_api";
 import {message} from "ant-design-vue";
 
   console.log(import.meta.env)
@@ -193,7 +235,8 @@ import {message} from "ant-design-vue";
     ],
     selectedRowKeys: [],
     count: 0,
-    modelVisible: false
+    modelVisible: false,
+    modelUpdateVisible: false,
   })
 
   const _formState = {
@@ -214,14 +257,29 @@ import {message} from "ant-design-vue";
         "permission": null
       }
   )
+  const formUpdateState = reactive({
+    "nickname":"",
+    "permission": null,
+    "user_id": 0
+  })
+
+function addModal() {
+  data.modelVisible = true
+}
 
   function onSelectChange(selectedKeys) {
     data.selectedRowKeys = selectedKeys
 
   }
 
-  function removeBatch() {
-    console.log(data.selectedRowKeys)
+  async function removeBatch() {
+    let res = await userRemoveApi(data.selectedRowKeys)
+    if (res.code) {
+      message.error(res.msg)
+      return
+    }
+    message.success(res.msg)
+    getData()
   }
 
   //获取用户信息
@@ -246,11 +304,46 @@ import {message} from "ant-design-vue";
       data.modelVisible = false
       Object.assign(formState, _formState)
       formRef.value.clearValidate()
-
+      getData()
     } catch (e) {
 
     }
   }
+  //分页
+ function pageChange(page, limit) {
+    getData()
+ }
+
+ async function userRemove(user_id) {
+    let res = await userRemoveApi([user_id])
+    if (res.code) {
+      message.error(res.msg)
+      return
+    }
+    message.success(res.msg)
+    getData()
+ }
+
+ //编辑修改 赋值
+function updateModal(record) {
+    data.modelUpdateVisible = true
+    formUpdateState.user_id = record.ID
+    formUpdateState.nickname = record.nickname
+    formUpdateState.permission = record.permission
+}
+
+//编辑修改 事件
+async function update() {
+  data.modelUpdateVisible = false
+  let res = await userUpdateNicknameApi(formUpdateState)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  getData()
+}
+
   //释放数据
   getData()
 </script>
