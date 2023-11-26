@@ -83,7 +83,7 @@ import {reactive, ref} from "vue";
 import { getFormatDate } from "@/utils/date";
 import {userListApi, userCreateApi, userRemoveApi, userUpdateNicknameApi} from "@/api/user_api";
 import {message} from "ant-design-vue";
-import {imageListApi} from "@/api/image_api";
+import {imageListApi, imageUpdateApi} from "@/api/image_api";
 
 //分页数据
 const page = reactive({
@@ -133,8 +133,8 @@ const data = reactive({
 })
 
 const formUpdateState = reactive({
+  "id": 0,
   "name":"",
-  "image_id": 0
 })
 
 //选择复选框
@@ -177,13 +177,13 @@ async function userRemove(user_id) {
 //编辑修改 赋值
 function updateModal(record) {
   data.modelUpdateVisible = true
-  formUpdateState.image_id = record.ID
+  formUpdateState.id = record.ID
   formUpdateState.name = record.name
 }
 //编辑修改 事件
 async function update() {
   data.modelUpdateVisible = false
-  let res = await userUpdateNicknameApi(formUpdateState)
+  let res = await imageUpdateApi(formUpdateState)
   if (res.code) {
     message.error(res.msg)
     return
