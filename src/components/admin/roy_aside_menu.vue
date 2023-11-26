@@ -84,6 +84,20 @@ const router = useRouter();
             name: "menu_list", // 路由名称
           }
         ]
+      },
+      {
+        id : 9,
+        icon: "fa fa-user-plus", //icon图标 统一用 fa
+        title: "图片管理", // 菜单名称 二级路由
+        name: "image_create", // 路由名称
+        children: [
+          {
+            id: 10,
+            icon: "fa fa-user", //icon图标 统一用 fa
+            title: "图片列表", // 菜单名称 二级路由
+            name: "image_list", // 路由名称
+          }
+        ]
       }
     ]
   })

@@ -34,6 +34,11 @@ const router = createRouter({
           name: "system_list",
           component: () => import("../views/admin/system_mgr/system_list.vue")
         },
+        {
+          path: "image_list",
+          name: "image_list",
+          component: () => import("../views/admin/image_mgr/image_list.vue")
+        },
       ]
     },
     {
