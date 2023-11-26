@@ -17,6 +17,7 @@
 
 <script setup>
   import {reactive} from "vue";
+  import {dataSumApi} from "@/api/data_api";
 
   const iconList = [
         "icon-yonghutongji",
@@ -28,7 +29,7 @@
     sum_data_list: [
       {
         label: "用户总数",
-        value: 21,
+        value: 1,
       },
       {
         label: "文章总数",
@@ -40,6 +41,13 @@
       }
     ]
   })
+  async function getData() {
+    let res = await dataSumApi()
+    data.sum_data_list[0].value = res.data.user_count
+    data.sum_data_list[1].value = res.data.article_count
+    data.sum_data_list[2].value = res.data.img_count
+  }
+  getData()
 </script>
 
 <style lang="scss">
