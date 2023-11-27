@@ -33,6 +33,8 @@
 
 <script setup>
 import {useRoute, useRouter} from "vue-router";
+import {message} from "ant-design-vue";
+import {userLogoutApi} from "@/api/user_api";
 
 const router = useRouter();
 const route = useRoute();
@@ -48,8 +50,15 @@ const props = defineProps({
 function menuClick({key}) {
   //退出操作 其他跳转路由
   if (key === "logout") {
-    console.log("logout")
-    return
+    let res = userLogoutApi()
+    if (res.code) {
+      message.error(res.msg)
+      return
+    }
+    router.push({
+      name: "login"
+    })
+    message.success(res.msg)
   }
   if (key === "login") {
     router.push({

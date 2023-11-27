@@ -56,7 +56,7 @@
                 title="Are you sure delete this task?"
                 ok-text="Yes"
                 cancel-text="No"
-                @confirm="userRemove(record.ID)"
+                @confirm="imageRemove(record.ID)"
             >
               <a-button type="primary" danger>删除</a-button>
             </a-popconfirm>
@@ -81,9 +81,8 @@
 <script setup>
 import {reactive, ref} from "vue";
 import { getFormatDate } from "@/utils/date";
-import {userListApi, userCreateApi, userRemoveApi, userUpdateNicknameApi} from "@/api/user_api";
 import {message} from "ant-design-vue";
-import {imageListApi, imageUpdateApi} from "@/api/image_api";
+import {imageListApi, imageRemoveApi, imageUpdateApi} from "@/api/image_api";
 
 //分页数据
 const page = reactive({
@@ -144,7 +143,7 @@ function onSelectChange(selectedKeys) {
 }
 //批量删除
 async function removeBatch() {
-  let res = await userRemoveApi(data.selectedRowKeys)
+  let res = await imageRemoveApi(data.selectedRowKeys)
   if (res.code) {
     message.error(res.msg)
     return
@@ -165,8 +164,8 @@ function pageChange(page, limit) {
   getData()
 }
 //用户单独删除
-async function userRemove(user_id) {
-  let res = await userRemoveApi([user_id])
+async function imageRemove(id) {
+  let res = await imageRemoveApi([id])
   if (res.code) {
     message.error(res.msg)
     return
