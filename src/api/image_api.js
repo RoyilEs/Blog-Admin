@@ -11,8 +11,3 @@ export function imageListApi(params) {
 export function imageUpdateApi(data) {
     return Service.put("/api/images", data)
 }
-
-//图片删除
-export function imageRemoveApi(id_list) {
-    return Service.delete("/api/images", {data: {id_list}})
-}

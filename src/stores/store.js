@@ -21,7 +21,6 @@ export const useStore = defineStore('roy',  {
  },
   actions: {
    //切换主题
-      userInfo: undefined,
    setTheme() {
        this.theme = !this.theme
      if (this.value) {

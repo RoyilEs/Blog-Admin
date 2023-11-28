@@ -22,8 +22,3 @@ export function userRemoveApi(id_list) {
 export function userUpdateNicknameApi(data) {
     return Service.put("/api/user_update_role", data)
 }
-
-//登出
-export function userLogoutApi() {
-    return Service.get("/api/logout")
-}
