@@ -1,6 +1,20 @@
 <template>
   <div class="container">
-    <!--TODO 修改表单待修改 -->
+    <a-modal v-model:visible="data.visible" title="新增图片" @ok="uploadOK">
+        <a-upload
+            v-model:file-list="data.fileList"
+            action="/api/images"
+            list-type="picture-card"
+            name="images"
+            multiple
+            :headers="{token: store.userInfo.token}"
+        >
+          <i class="fa fa-cloud-upload"></i>
+          <div style="margin-left: 5px">Upload</div>
+        </a-upload>
+      <!--注意一定跟后端list名字对应   multiple多选 -->
+    </a-modal>
+
     <a-modal v-model:visible="data.modelUpdateVisible" title="编辑图片" @ok="update">
       <a-form
           :model="formUpdateState"
@@ -10,13 +24,19 @@
           :wrapper-col="{ span: 16 }"
           autocomplete="off"
       >
-        <span>图片ID: {{ formUpdateState.image_id }}</span>
+        <span>图片ID: {{ formUpdateState.id }}</span>
         <a-form-item
             label="name"
             name="name" has-feedback
             :rules="[{ required: true, message: 'Please input your name!', trigger: 'blur' }]"
         >
           <a-input v-model:value="formUpdateState.name" placeholder="name"/>
+        </a-form-item>
+        <a-form-item
+            label="图片"
+            name="path" has-feedback
+        >
+          <img :src="formUpdateState.path" width="150" style="border-radius: 5px" alt="图片地址">
         </a-form-item>
       </a-form>
     </a-modal>
@@ -30,6 +50,7 @@
       </a-space>
     </div>
     <div class="actions">
+      <a-button type="primary" @click="data.visible = true">New Image</a-button>
       <a-button type="primary"
                 @click="removeBatch"
                 danger v-if="data.selectedRowKeys.length">Remove Image</a-button>
@@ -81,9 +102,11 @@
 <script setup>
 import {reactive, ref} from "vue";
 import { getFormatDate } from "@/utils/date";
-import {userListApi, userCreateApi, userRemoveApi, userUpdateNicknameApi} from "@/api/user_api";
 import {message} from "ant-design-vue";
-import {imageListApi, imageUpdateApi} from "@/api/image_api";
+import {imageListApi, imageRemoveApi, imageUpdateApi} from "@/api/image_api";
+import {useStore} from "@/stores/store";
+
+const store = useStore()
 
 //分页数据
 const page = reactive({
@@ -129,12 +152,15 @@ const data = reactive({
   ],
   selectedRowKeys: [],
   count: 0,
+  Visible: false,
   modelUpdateVisible: false,
+  fileList: [],
 })
 
 const formUpdateState = reactive({
   "id": 0,
   "name":"",
+  "path":"",
 })
 
 //选择复选框
@@ -165,8 +191,8 @@ function pageChange(page, limit) {
   getData()
 }
 //用户单独删除
-async function userRemove(user_id) {
-  let res = await userRemoveApi([user_id])
+async function userRemove(id) {
+  let res = await imageRemoveApi([id])
   if (res.code) {
     message.error(res.msg)
     return
@@ -179,6 +205,7 @@ function updateModal(record) {
   data.modelUpdateVisible = true
   formUpdateState.id = record.ID
   formUpdateState.name = record.name
+  formUpdateState.path = record.path
 }
 //编辑修改 事件
 async function update() {
@@ -189,6 +216,11 @@ async function update() {
     return
   }
   message.success(res.msg)
+  getData()
+}
+
+function uploadOK() {
+  data.visible = false
   getData()
 }
 
@@ -219,8 +251,7 @@ getData()
     padding: 10px;
   }
   .table_path {
-    width: 150px;
-    height: 80px;
+    height: 90px;
     border-radius: 10%;
   }
 }
