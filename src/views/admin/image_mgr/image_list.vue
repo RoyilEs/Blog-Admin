@@ -111,7 +111,7 @@ const store = useStore()
 //分页数据
 const page = reactive({
   page: 1,
-  limit: 5
+  limit: 10
 })
 const formRef = ref(null)
 
