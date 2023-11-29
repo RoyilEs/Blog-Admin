@@ -98,6 +98,20 @@ const router = useRouter();
             name: "image_list", // 路由名称
           }
         ]
+      },
+      {
+        id : 11,
+        icon: "fa fa-image", //icon图标 统一用 fa
+        title: "文章管理", // 菜单名称 二级路由
+        name: "article_create", // 路由名称
+        children: [
+          {
+            id: 12,
+            icon: "fa fa-file-image-o", //icon图标 统一用 fa
+            title: "图片列表", // 菜单名称 二级路由
+            name: "article_list", // 路由名称
+          }
+        ]
       }
     ]
   })

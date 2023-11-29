@@ -7,7 +7,7 @@
     <div class="drop_menu">
       <a-dropdown>
         <a class="ant-dropdown-link" @click.prevent>
-          Hover me
+          {{ store.userInfo.username }}
           <i class="fa fa-angle-down"></i>
         </a>
         <template #overlay>
@@ -32,10 +32,14 @@
 </template>
 
 <script setup>
-import {useRoute, useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router"
+import {useStore} from "@/stores/store"
 
-const router = useRouter();
-const route = useRoute();
+const store = useStore()
+
+const router = useRouter()
+const route = useRoute()
+
 
 const props = defineProps({
   //是否显示头像部分
