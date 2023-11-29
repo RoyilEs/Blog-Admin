@@ -1,6 +1,6 @@
 
 <template>
-  <RouterView/>
+  <RouterView></RouterView>
 </template>
 
 <script setup>
@@ -24,3 +24,5 @@
     --text: #555;
   }
 </style>
+
+

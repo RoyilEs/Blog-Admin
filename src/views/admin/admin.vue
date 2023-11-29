@@ -24,7 +24,12 @@
         <div class="tabs"></div>
         <main>
           <div class="roy_view">
-            <router-view></router-view>
+            <router-view  v-slot="{Component}">
+              <transition name="fade" mode="out-in">
+                <component :is="Component">
+                </component>
+              </transition>
+            </router-view>
           </div>
 
         </main>
@@ -64,6 +69,8 @@ function setTheme() {
         width: calc(100% - 240px);
         height: 100vh;
         overflow-y: auto;
+        background-color: var(--bg);
+        overflow-x: hidden;
 
         header {
             height: 60px;
@@ -117,4 +124,25 @@ function setTheme() {
         }
     }
   }
+</style>
+
+<style>
+.fade-leave-to {
+  opacity: 0;
+  transform: translate(30px);
+}
+
+.fade-enter-active {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-enter-to {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.fade-leave-active, .fade-enter-active {
+  transition: all 0.3s ease-out;
+}
 </style>

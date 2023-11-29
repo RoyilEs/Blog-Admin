@@ -123,10 +123,10 @@ const data = reactive({
       title: 'ID',dataIndex: 'ID', key: 'ID',
     },
     {
-      title: '图片地址', dataIndex: 'path', key: 'path',
+      title: '名字', dataIndex: 'name', key: 'name',
     },
     {
-      title: '名字', dataIndex: 'name', key: 'name',
+      title: '图片地址', dataIndex: 'path', key: 'path',
     },
     {
       title: '位置', dataIndex: 'image_type', key: 'image_type',

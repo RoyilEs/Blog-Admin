@@ -16,3 +16,8 @@ export function imageUpdateApi(data) {
 export function imageRemoveApi(id_list) {
     return Service.delete("/api/images/", {data: {id_list}})
 }
+
+// MIC图库随机获取
+export function MICImageRandApi() {
+    return Service.get("/api/imageAll_one")
+}

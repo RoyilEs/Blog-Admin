@@ -12,12 +12,18 @@
         </div>
       </div>
     </div>
+
+<!--    <div class="random">-->
+<!--      <RandImage></RandImage>-->
+<!--    </div>-->
+
   </div>
 </template>
 
 <script setup>
   import {reactive} from "vue";
   import {dataSumApi} from "@/api/data_api";
+  // import RandImage from "@/components/rand_image.vue";
 
   const iconList = [
         "icon-yonghutongji",
