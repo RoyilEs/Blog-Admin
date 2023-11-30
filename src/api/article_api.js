@@ -13,3 +13,8 @@ export function articleContentListApi() {
 export function articleCreateApi(data) {
     return Service.post("/api/articles", data)
 }
+
+// 删除文章
+export function articleRemoveApi(id_list) {
+    return Service.delete("/api/articles/", {data: {id_list}})
+}

@@ -110,9 +110,9 @@
 import {computed, reactive, ref} from "vue";
 import { getFormatDate } from "@/utils/date";
 import {message} from "ant-design-vue";
-import {imageListApi, imageRemoveApi, imageUpdateApi} from "@/api/image_api";
+import { imageUpdateApi} from "@/api/image_api";
 import {useStore} from "@/stores/store";
-import {articleListApi} from "@/api/article_api";
+import {articleListApi, articleRemoveApi} from "@/api/article_api";
 import {snippet} from "@/utils/content";
 
 const store = useStore()
@@ -144,13 +144,16 @@ const data = reactive({
       title: '创建时间', dataIndex: 'CreatedAt', key: 'CreatedAt',
     },
     {
-      title: '索引', dataIndex: 'abstract', key: 'abstract',
+      title: '介绍', dataIndex: 'abstract', key: 'abstract',
     },
     {
       title: '内容', dataIndex: 'content', key: 'content',
     },
     {
-      title: '创建人', dataIndex: 'source', key: 'source',
+      title: '分类', dataIndex: 'category', key: 'category',
+    },
+    {
+      title: '作者', dataIndex: 'source', key: 'source',
     },
     {
       title: '字数', dataIndex: 'word', key: 'word',
@@ -199,7 +202,7 @@ function onSelectChange(selectedKeys) {
 }
 //批量删除
 async function removeBatch() {
-  let res = await userRemoveApi(data.selectedRowKeys)
+  let res = await articleRemoveApi(data.selectedRowKeys)
   if (res.code) {
     message.error(res.msg)
     return
@@ -221,7 +224,7 @@ function pageChange(page, limit) {
 }
 //用户单独删除
 async function userRemove(id) {
-  let res = await imageRemoveApi([id])
+  let res = await articleRemoveApi([id])
   if (res.code) {
     message.error(res.msg)
     return
