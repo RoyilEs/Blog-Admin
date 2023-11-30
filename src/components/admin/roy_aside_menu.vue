@@ -108,7 +108,7 @@ const router = useRouter();
           {
             id: 12,
             icon: "fa fa-file-image-o", //icon图标 统一用 fa
-            title: "图片列表", // 菜单名称 二级路由
+            title: "文章列表", // 菜单名称 二级路由
             name: "article_list", // 路由名称
           }
         ]

@@ -65,7 +65,11 @@
       >
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'path'">
-            <img class="table_path" :src="record.path" alt="图片地址">
+            <a-image
+                :width="90"
+                :src="record.path"
+                style="border-radius: 10px;"
+            />
           </template>
           <!-- 时间渲染-->
           <template v-if="column.key === 'CreatedAt'">
@@ -170,7 +174,7 @@ function onSelectChange(selectedKeys) {
 }
 //批量删除
 async function removeBatch() {
-  let res = await userRemoveApi(data.selectedRowKeys)
+  let res = await imageRemoveApi(data.selectedRowKeys)
   if (res.code) {
     message.error(res.msg)
     return
@@ -249,10 +253,6 @@ getData()
     display: flex;
     justify-content: center;
     padding: 10px;
-  }
-  .table_path {
-    height: 90px;
-    border-radius: 10%;
   }
 }
 </style>
