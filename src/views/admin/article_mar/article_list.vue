@@ -1,22 +1,6 @@
 <template>
-  <!--TODO 只做了展示  -->
   <div class="container">
-    <a-modal v-model:visible="data.visible" title="新增图片" @ok="uploadOK">
-      <a-upload
-          v-model:file-list="data.fileList"
-          action="/api/images"
-          list-type="picture-card"
-          name="images"
-          multiple
-          :headers="{token: store.userInfo.token}"
-      >
-        <i class="fa fa-cloud-upload"></i>
-        <div style="margin-left: 5px">Upload</div>
-      </a-upload>
-      <!--注意一定跟后端list名字对应   multiple多选 -->
-    </a-modal>
-
-    <a-modal v-model:visible="data.modelUpdateVisible" title="编辑图片" @ok="update">
+    <a-modal v-model:visible="data.modelUpdateVisible" title="编辑文章" @ok="update">
       <a-form
           :model="formUpdateState"
           name="basic"
@@ -25,20 +9,43 @@
           :wrapper-col="{ span: 16 }"
           autocomplete="off"
       >
-        <span>图片ID: {{ formUpdateState.id }}</span>
+        <span>文章ID: {{ formUpdateState.id }}</span>
         <a-form-item
-            label="name"
-            name="name" has-feedback
-            :rules="[{ required: true, message: 'Please input your name!', trigger: 'blur' }]"
+            label="title"
+            name="title" has-feedback
+            :rules="[{ required: true, message: 'Please input your title!', trigger: 'blur' }]"
         >
-          <a-input v-model:value="formUpdateState.name" placeholder="name"/>
+          <a-input v-model:value="formUpdateState.title" placeholder="title"/>
         </a-form-item>
         <a-form-item
-            label="图片"
-            name="path" has-feedback
+            label="abstract"
+            name="abstract" has-feedback
+            :rules="[{ required: true, message: 'Please input your abstract!', trigger: 'blur' }]"
         >
-          <img :src="formUpdateState.banner_path" width="150" style="border-radius: 5px" alt="图片地址">
+          <a-input v-model:value="formUpdateState.abstract" placeholder="abstract"/>
         </a-form-item>
+        <a-form-item
+            label="content"
+            name="content" has-feedback
+            :rules="[{ required: true, message: 'Please input your content!', trigger: 'blur' }]"
+        >
+          <a-textarea  v-model:value="formUpdateState.content" placeholder="content"/>
+        </a-form-item>
+        <a-form-item
+            label="category"
+            name="category" has-feedback
+            :rules="[{ required: true, message: 'Please input your category!', trigger: 'blur' }]"
+        >
+          <a-input v-model:value="formUpdateState.category" placeholder="category"/>
+        </a-form-item>
+        <a-form-item
+            label="banner_id"
+            name="banner_id" has-feedback
+            :rules="[{ required: true, message: 'Please input your banner_id!', trigger: 'blur' }]"
+        >
+          <a-input v-model:value="formUpdateState.banner_id" placeholder="banner_id"/>
+        </a-form-item>
+
       </a-form>
     </a-modal>
 
@@ -107,12 +114,12 @@
 </template>
 
 <script setup>
-import {computed, reactive, ref} from "vue";
+import { reactive, ref} from "vue";
 import { getFormatDate } from "@/utils/date";
 import {message} from "ant-design-vue";
-import { imageUpdateApi} from "@/api/image_api";
+import {imageNameListApi, imageUpdateApi} from "@/api/image_api";
 import {useStore} from "@/stores/store";
-import {articleListApi, articleRemoveApi} from "@/api/article_api";
+import {articleListApi, articleRemoveApi, articleUpdateApi} from "@/api/article_api";
 import {snippet} from "@/utils/content";
 
 const store = useStore()
@@ -124,6 +131,11 @@ const page = reactive({
 })
 const formRef = ref(null)
 
+
+async function getImage() {
+  let res = await imageNameListApi()
+  banners.data = res.data
+}
 
 //表格的数据
 const data = reactive({
@@ -186,13 +198,21 @@ const data = reactive({
   Visible: false,
   modelUpdateVisible: false,
   fileList: [],
+  banners:[
+    {
+      "id": 0,
+      "path": "/uploads/file/bsbr.jpg",
+    }
+  ],
+  ID: 0
 })
 
-
 const formUpdateState = reactive({
-  "id": 0,
-  "name":"",
-  "path":"",
+  "title": "",
+  "abstract": "",
+  "content":"",
+  "category":"",
+  "banner_id": 0
 })
 
 //选择复选框
@@ -236,23 +256,23 @@ async function userRemove(id) {
 function updateModal(record) {
   data.modelUpdateVisible = true
   formUpdateState.id = record.ID
-  formUpdateState.name = record.name
-  formUpdateState.path = record.path
+  formUpdateState.title = record.title
+  formUpdateState.abstract = record.abstract
+  formUpdateState.content = record.content
+  formUpdateState.category = record.category
+  formUpdateState.banner_id = record.banner_id
+  data.ID = record.ID
 }
 //编辑修改 事件
 async function update() {
   data.modelUpdateVisible = false
-  let res = await imageUpdateApi(formUpdateState)
+  formUpdateState.banner_id = Number(formUpdateState.banner_id)
+  let res = await articleUpdateApi(formUpdateState, data.ID)
   if (res.code) {
     message.error(res.msg)
     return
   }
   message.success(res.msg)
-  getData()
-}
-
-function uploadOK() {
-  data.visible = false
   getData()
 }
 

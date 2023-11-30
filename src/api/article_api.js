@@ -18,3 +18,8 @@ export function articleCreateApi(data) {
 export function articleRemoveApi(id_list) {
     return Service.delete("/api/articles/", {data: {id_list}})
 }
+
+// 更新文章
+export function articleUpdateApi(data, id) {
+    return Service.put("/api/articles/?id="+id, data)
+}

@@ -110,6 +110,12 @@ const router = useRouter();
             icon: "fa fa-file-image-o", //icon图标 统一用 fa
             title: "文章列表", // 菜单名称 二级路由
             name: "article_list", // 路由名称
+          },
+          {
+            id: 13,
+            icon: "fa fa-create", //icon图标 统一用 fa
+            title: "添加文章", // 菜单名称 二级路由
+            name: "article_create", // 路由名称
           }
         ]
       }
