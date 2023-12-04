@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <index></index>
   </div>
 </template>
 
@@ -38,6 +39,7 @@
   import { parseToken } from "@/utils/jwt";
   import { useStore } from "@/stores/store";
   import { useRoute, useRouter } from "vue-router";
+  import index from "@/components/index.vue"
 
   const store = useStore()
   const router = useRouter()
