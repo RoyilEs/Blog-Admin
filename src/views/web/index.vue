@@ -1,10 +1,10 @@
 <template>
   <div class="base_view">
-    <Roy_nav></Roy_nav>
-
     <div class="base_container">
         <div class="left-info">
-
+          <div class="left-home">
+            <PostList :posts="posts" />
+          </div>
         </div>
 
         <div class="right-info">
@@ -21,10 +21,13 @@
 </template>
 
 <script setup>
+import PostList from "@/components/web/post_list.vue";
 import Time from "@/components/web/Time.vue";
 import Introduce from "@/components/web/Introduce.vue";
-import Roy_nav from "@/components/roy_nav.vue";
+import getPosts from "@/composibles/getPosts";
 
+const { posts, load } = getPosts()
+load()
 
 </script>
 
@@ -38,7 +41,7 @@ import Roy_nav from "@/components/roy_nav.vue";
   .base_container {
     width: 1400px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: row;
     align-items: center;
     min-height: 1000px;
@@ -48,12 +51,12 @@ import Roy_nav from "@/components/roy_nav.vue";
 .left-info {
   display: flex;
   flex-direction: column;
-  width: 900px;
+  width: 1000px;
   min-height: 100vh;
 }
 
 .right-info {
-  width: 350px;
+  width: 300px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

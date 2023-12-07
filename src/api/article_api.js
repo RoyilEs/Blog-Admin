@@ -9,6 +9,10 @@ export function articleListApi(params) {
 export function articleContentListApi() {
     return Service.get("/api/article_content_list")
 }
+// 文章单个内容
+export function articleContentDetailApi(id) {
+    return Service.get("/api/article_content_detail/" + id)
+}
 // 创建文章
 export function articleCreateApi(data) {
     return Service.post("/api/articles", data)

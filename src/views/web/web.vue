@@ -1,10 +1,12 @@
 <template>
-<router-view></router-view>
+  <Roy_nav></Roy_nav>
+  <router-view></router-view>
   <div class="bg_img"></div>
 </template>
 
 <script setup>
 
+import Roy_nav from "@/components/roy_nav.vue";
 </script>
 
 

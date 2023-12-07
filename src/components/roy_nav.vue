@@ -8,8 +8,9 @@
         <div>RoyのBlog</div>
       </div>
       <div class="left">
-        <span><a href="/" class="router-link-active">首页</a></span>
-        <span><a href="/img_roy" class="">傻瓜表情</a></span>
+        <span
+            v-for="item in data.menuNameList" :key="item.id">
+          <router-link :to="item.path">{{ item.menu_title }}</router-link></span>
       </div>
       <div class="right">
         <span class="login_btn" v-if="store.userInfo.role === 0"><a href="">登录</a></span>
@@ -24,6 +25,7 @@ import Roy_user_info from "@/components/roy_user_info.vue";
 
 import {useStore} from "@/stores/store";
 import {reactive, ref} from "vue";
+import {getMenuNameListApi} from "@/api/menu_api";
 
 const props = defineProps({
   is_show: {
@@ -34,9 +36,13 @@ const props = defineProps({
 
 const data = reactive({
   is_show: false,
+  menuNameList: [],
 })
 
 async function getInit() {
+  let res = await getMenuNameListApi() //所有菜单名字与路径数据
+  data.menuNameList = res.data
+
   if (props.is_show) {
     data.is_show = true
   } else {
@@ -94,6 +100,10 @@ getInit()
 
       &:hover {
         color: var(--bg);
+      }
+
+      &.router-link-exact-active {
+        color: brown;
       }
     }
   }

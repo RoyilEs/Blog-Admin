@@ -231,7 +231,7 @@ async function removeBatch() {
   getData()
 }
 
-//获取用户信息
+//获取文章信息
 async function getData() {
   //请求出的数据是 userList
   let res = await articleListApi(page)

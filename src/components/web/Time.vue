@@ -10,14 +10,14 @@
           
 
         time.textContent = hours +":"+ minutes +":"+ seconds
-    })
+    }, 1000)
 </script>
 
 
 <template>
   <div class="wrapper">
     <div class="display">
-        <div id="time">12:00:00 PM</div>
+        <div id="time">12:00:00</div>
     </div>
     
   </div>

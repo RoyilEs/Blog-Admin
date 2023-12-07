@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Details from "../views/web/details.vue"
 
 
 const router = createRouter({
@@ -23,6 +24,12 @@ const router = createRouter({
           path: "img_roy",
           name: "img_roy",
           component: () => import("../views/web/img_roy.vue"),
+        },
+        {
+          path: "/articles/:id",
+          name: "details",
+          component: Details,
+          props: true
         },
       ]
     },
