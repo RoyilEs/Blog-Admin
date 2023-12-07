@@ -13,7 +13,7 @@
             </div>
             <div class="right">
                 <div class="icon_actions">
-                  <i class="fa fa-home"></i>
+                  <router-link to="/"><i class="fa fa-home"></i></router-link>
                   <i v-if="theme" class="fa fa-sun-o" @click="setTheme"></i>
                   <i v-else class="fa fa-moon-o" @click="setTheme"></i>
                   <i class="fa fa-arrows-alt"></i>

@@ -11,8 +11,20 @@ const router = createRouter({
     },
     {
       path: "/",
-      name: "index",
-      component: () => import("../views/web/index.vue")
+      name: "index_base",
+      component: () => import("../views/web/web.vue"),
+      children: [
+        {
+          path: "",
+          name: "index",
+          component: () => import("../views/web/index.vue"),
+        },
+        {
+          path: "img_roy",
+          name: "img_roy",
+          component: () => import("../views/web/img_roy.vue"),
+        },
+      ]
     },
     {
       path: "/admin",

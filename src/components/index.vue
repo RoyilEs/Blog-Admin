@@ -9,8 +9,8 @@
   <div class="a">
     <div class="b">
       <a href="#">RoyのBlog</a>
-      <h2>WX:Sod-of-goat</h2>
-      <span>I'm a front-end developer enthusiast,<br/>I'm learning new knowledge every day to share with you,<br/>I hope in the days to come<br/>Keep going!!</span>
+      <h2>WX: 185 0000 </h2>
+      <span>占位1,<br/>占位2,<br/>I hope in the days to come<br/>Keep going!!</span>
     </div>
     <div class="c">
       <!-- --i是用来计算平面圆柱的动效延迟和距离的
