@@ -8,6 +8,7 @@
     </div>
     <div class="singe-info">
       <h3>{{ post.title }}</h3>
+      <hr>
       <div class="singe-text">
         <p class="pre" v-for="item in sinppet" :key="item" v-html="item"></p>
       </div>
@@ -65,7 +66,7 @@ hr {
 .singe-time{
   word-wrap: break-word;
   min-height: 40px;
-  max-width: 305px;
+  max-width: 335px;
   padding: 20px;
   margin-top: 40px;
   display: flex;

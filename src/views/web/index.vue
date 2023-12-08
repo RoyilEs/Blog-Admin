@@ -56,6 +56,7 @@ load()
 }
 
 .right-info {
+  margin-bottom: 80vh;
   width: 300px;
   min-height: 100vh;
   display: flex;
