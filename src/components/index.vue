@@ -114,7 +114,7 @@
   width: 300px;
   height: 250px;
   position: absolute;
-  background-image: url("../assets/img/点赞.png");
+  background-image: url("../../public/img/点赞.png");
   background-size: cover;
   margin: 70px;
   opacity: 0;

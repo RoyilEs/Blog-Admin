@@ -1,7 +1,7 @@
 <template>
   <div class="roy_user_info">
     <div class="avatar" v-if="props.isAvatar">
-      <img src="/src/assets/img/头像.jpg" alt="头像">
+      <img src="/img/头像.jpg" alt="头像">
     </div>
 
     <div class="drop_menu">

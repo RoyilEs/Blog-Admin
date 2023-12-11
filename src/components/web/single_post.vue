@@ -8,11 +8,12 @@
     </div>
     <div class="article_content">
       <div class="post_left">
-        <p>{{ snippetContent }}</p>
+          <p>{{ snippetContent }}</p>
+          <span>字数:{{ post.word }}</span>
       </div>
       <div class="post_right">
         <a-image
-            :width="120"
+            :width="110"
             :src="post.banner_path"
             style="border-radius: 10px;"
         />
@@ -31,7 +32,7 @@ const props = defineProps({
 })
 
 const snippetContent = computed(() => {
-  return snippet(props.post.content, 80)
+  return snippet(props.post.content, 30)
 })
 //单个文章主页展示
 </script>
@@ -63,6 +64,7 @@ const snippetContent = computed(() => {
     width: 500px;
     display: flex;
     flex-direction: column;
+
   }
 }
 

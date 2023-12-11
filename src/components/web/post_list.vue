@@ -19,9 +19,9 @@ defineProps({
 <style scoped lang="scss">
 .left-block {
   word-wrap: break-word;
-  min-height: 40px;
+  min-height: 30px;
   padding: 20px;
-  margin-top: 40px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   border-radius: 12px;

@@ -12,7 +12,7 @@ import Roy_nav from "@/components/roy_nav.vue";
 
 <style scoped lang="scss">
 .bg_img{
-  background-image: url("src/assets/img/back-roy1.png");
+  background-image: url("../../../public/img/back-roy1.png");
   background-size: cover;
   background-attachment: scroll;
   background-repeat: no-repeat;
@@ -22,5 +22,6 @@ import Roy_nav from "@/components/roy_nav.vue";
   position: fixed;
   top: 0;
   opacity: .5;
-  transition: opacity 1s linear;}
+  transition: opacity 1s linear;
+}
 </style>

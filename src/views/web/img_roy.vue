@@ -1,21 +1,6 @@
 <template>
-<div class="base_container">
-  <div class="tag">
-    <div class="img-div">
-      <div class="info">
-        <div class="img_roy"><img src="src\assets\roy\Roy_乐.png" alt="乐"></div>
-      </div>
-      <div class="info">
-        <div class="img_roy"><img src="src\assets\roy\Roy_乐2.png" alt="乐2"></div>
-      </div>
-      <div class="info">
-        <div class="img_roy"><img src="src\assets\roy\Roy_无语.png" alt="无语"></div>
-      </div>
-      <div class="info">
-        <div class="img_roy"><img src="src\assets\roy\Roy_看书.png" alt="看书" style="height: -30px;"></div>
-      </div>
-    </div>
-  </div>
+<div>
+  表情包
 </div>
 </template>
 

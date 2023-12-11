@@ -2,7 +2,7 @@
   <aside class="roy_aside">
   <div class="roy_aside_header flex">
     <div class="roy_aside_logo flex">
-      <img src="/src/assets/img/Roy_乐2.png" alt="logo">
+      <img src="/img/Roy_乐2.png" alt="logo">
     </div>
     <div class="roy_aside_title">Roy后台系统</div>
   </div>

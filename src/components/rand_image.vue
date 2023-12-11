@@ -31,11 +31,12 @@
 
 <style lang="scss">
   .randImage {
+    padding: 15px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    background-color: cadetblue;
-    width: 300px;
+    background-color: white;
+    width: 280px;
     border-radius: 10px;
     align-items: center;
   }

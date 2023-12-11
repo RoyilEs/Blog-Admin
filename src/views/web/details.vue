@@ -10,7 +10,7 @@
       <h3>{{ post.title }}</h3>
       <hr>
       <div class="singe-text">
-        <p class="pre" v-for="item in sinppet" :key="item" v-html="item"></p>
+        <span class="pre" v-for="item in sinppet" :key="item" v-html="item"></span>
       </div>
     </div>
   </div>

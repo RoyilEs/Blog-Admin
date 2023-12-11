@@ -7,20 +7,23 @@
 
 <template>
   <div class='Introduce'>
-    <img src="src\assets\img\Roy_乐2.png" class="img-roy">
+    <img src="/img/Roy_乐2.png" class="img-roy" alt="头像">
     <h2>Roooyill</h2>
     <br>
     <div class="img">
       <div class="img"  style="font-size: 1rem;"><a href="https://github.com/RoyilEs" target="_blank">
-            <img src="src\assets\img\github.png" alt="github" style="width: 30px; height: 30px;"></a></div>
+            <img src="/img/github.png" alt="github" style="width: 30px; height: 30px;"></a></div>
       <div class="img" style="font-size: 1rem;"><a href="https://space.bilibili.com/49958282" target="_blank">
-            <img src="src\assets\img\bilibiliLogo.png" alt="bilibli" style="width: 30px; height: 30px;"></a></div>
+            <img src="/img/bilibiliLogo.png" alt="bilibli" style="width: 30px; height: 30px;"></a></div>
     </div>
   </div>
 </template>
 
 
 <style scoped>
+  h2 {
+    text-align: center;
+  }
   .img-roy {
     width: 240px;
     background-color: bisque;

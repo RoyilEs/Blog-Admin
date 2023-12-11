@@ -13,7 +13,7 @@
           <router-link :to="item.path">{{ item.menu_title }}</router-link></span>
       </div>
       <div class="right">
-        <span class="login_btn" v-if="store.userInfo.role === 0"><a href="">登录</a></span>
+        <span class="login_btn" v-if="store.userInfo.role === 0"><a href="/login">登录</a></span>
         <Roy_user_info v-if="store.userInfo.role !== 0"></Roy_user_info>
       </div>
     </div>
@@ -74,7 +74,9 @@ getInit()
   height: 60px;
   display: flex;
   justify-content: center;
-  z-index: 100;
+  z-index: 10;
+  transition: all 0.5s;
+
 
   .nav_container {
     width: 1400px;
