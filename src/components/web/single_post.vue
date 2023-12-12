@@ -1,23 +1,31 @@
 <template>
   <div class="post">
-    <div class="title">
-      <router-link :to="{ name: 'details', params: { id: post.id } }">
-        <h3>{{ post.title }}</h3>
-        <hr>
-      </router-link>
-    </div>
     <div class="article_content">
       <div class="post_left">
+        <div class="title">
+          <router-link :to="{ name: 'details', params: { id: post.id } }">
+            <h3>{{ post.title }}</h3>
+          </router-link>
+        </div>
+        <hr>
+        <span>简介: {{ post.abstract }}</span>
           <p>{{ snippetContent }}</p>
           <span>字数:{{ post.word }}</span>
+          <div style="padding-top: 34px" class="post_nickname">
+            <h5>作者:{{ post.nickname }}</h5>
+          </div>
       </div>
-      <div class="post_right">
-        <a-image
-            :width="110"
-            :src="post.banner_path"
-            style="border-radius: 10px;"
-        />
-      </div>
+
+        <div class="post_right">
+          <el-image
+              :src="post.banner_path"
+            class="post_img"
+            :zoom-rate="1.2"
+            :initial-index="0" fit="cover"
+          >
+          </el-image>
+        </div>
+
     </div>
   </div>
 </template>
@@ -52,19 +60,60 @@ const snippetContent = computed(() => {
 
 .article_content {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
 
-  .post_right {
-    position: relative;
-    display: flex;
-    margin-left: 35vh;
+
+
+      @media screen and (width >= 200px) {
+
+        .comment-position {
+          position: relative;
+          width: 100%;
+          max-width: 180px;
+          padding-right: 20px;
+        }
+
+        .post_img {
+          overflow: hidden;
+          width: 170px;
+          height: auto;
+          object-fit: cover;
+          object-position: top;
+          border-radius: 12px 12px 12px 12px;
+      }
+
+        .info-block-photopage {
+          width: auto;
+        }
+  }
+
+  @media screen and (width < 200px) {
+
+    .comment-position {
+      position: relative;
+      width: 100%;
+    }
+
+    .post_img {
+      overflow: hidden;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px 12px 12px 12px;
+    }
+
+    .info-block-photopage {
+      width: 100%;
+    }
 
   }
 
   .post_left {
-    width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-
   }
 }
 
@@ -89,4 +138,10 @@ const snippetContent = computed(() => {
   padding-right: 40px;
   left: -30px;
 }
+h5 {
+  font-size: 16px;
+  color: #cbb696;
+}
+
+
 </style>
