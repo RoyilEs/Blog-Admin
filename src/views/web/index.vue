@@ -44,12 +44,15 @@ load()
 }
 
 .base_view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   .base_container {
 
     width: 1400px;
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    justify-content: space-around;
     min-height: 1000px;
   }
 }

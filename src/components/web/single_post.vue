@@ -5,6 +5,7 @@
         <div class="title">
           <router-link :to="{ name: 'details', params: { id: post.id } }">
             <h3>{{ post.title }}</h3>
+
           </router-link>
         </div>
         <hr>
