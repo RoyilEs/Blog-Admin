@@ -66,7 +66,7 @@ const snippetContent = computed(() => {
 
 
 
-      @media screen and (width >= 200px) {
+   @media screen and (width >= 200px) {
 
         .comment-position {
           position: relative;

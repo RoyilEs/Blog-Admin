@@ -14,7 +14,7 @@
       <!-- 显示图片-->
       <div v-for="banner in banners.data" :key="banner" class="pill">
         <span>ID: {{ banner.id }}</span>
-        <a-image :width="50" :src="banner.path" style="border-radius: 10px;"/>
+        <a-image :width="80" :height="80" :src="banner.path" style="border-radius: 10px;"/>
       </div>
       <div>
         <a-button type="primary" @click="handlerSubmit">添加</a-button>
