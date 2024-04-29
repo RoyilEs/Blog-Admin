@@ -1,19 +1,27 @@
 <!--自我介绍 -->
 <script setup>
-//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-//例如：import 《组件名称》 from '《组件路径》';
 
+import getAdmin from "@/composibles/getAdmin";
+
+
+const admin = "admin"
+
+const {post, load} = getAdmin(admin)
+console.log(post)
+
+
+load()
 </script>
 
 <template>
   <div class='Introduce'>
-    <img src="/img/Roy_乐2.png" class="img-roy" alt="头像">
-    <h2>Roooyill</h2>
+    <img :src="post.avatar"  class="img-roy" alt="头像">
+    <h2>{{ post.username }}</h2>
     <br>
     <div class="img">
-      <div class="img"  style="font-size: 1rem;"><a href="https://github.com/RoyilEs" target="_blank">
+      <div class="img"  style="font-size: 1rem;"><a :href="post.github" target="_blank">
             <img src="/img/github.png" alt="github" style="width: 30px; height: 30px;"></a></div>
-      <div class="img" style="font-size: 1rem;"><a href="https://space.bilibili.com/49958282" target="_blank">
+      <div class="img" style="font-size: 1rem;"><a :href="post.bilibili" target="_blank">
             <img src="/img/bilibiliLogo.png" alt="bilibli" style="width: 30px; height: 30px;"></a></div>
     </div>
   </div>

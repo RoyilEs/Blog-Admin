@@ -7,7 +7,6 @@
             <PostList :posts="posts" />
           </div>
         </div>
-
         <div class="right-info">
           <div class="right-time">
             <Time></Time>
@@ -20,8 +19,8 @@
           </div>
         </div>
       </div>
-    <div class="footer"></div>
   </div>
+  <div class="footer"><a href="https://beian.miit.gov.cn/" style="text-align: center">鲁ICP备2024064658号</a></div>
 </template>
 
 <script setup>
@@ -43,7 +42,14 @@ load()
   height: 240px;
 }
 
+.footer {
+  margin-top: auto; /* 利用Flexbox特性使footer始终位于底部 */
+  width: 100%;
+  height: 80px; /* 设置footer的高度 */
+}
+
 .base_view {
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
